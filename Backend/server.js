@@ -30,7 +30,7 @@
 //   });
 //   console.log(io);
 // io.on("connection", (socket) => {
-	
+
 // 	socket.emit("me", socket.id)
 
 // 	socket.on("disconnect", () => {
@@ -78,18 +78,20 @@ const wsServer = wsInstance.getWss();
 const io = require("socket.io")(server, {
   cors: {
     origin: [
-	 "https://172.168.3.31:3000",
-	"https://localhost:3000",
-	"https://192.168.56.27:3000",
-  "https://192.168.1.14:3000",
-	"https://169.254.106.148:3000",
-  	'http://localhost:3000',
-  	'https://192.168.124.160:3000',
-	'https://172.168.0.94:3000/',
-	'https://10.11.58.155:3000',
-  'https://172.168.0.174:3000',
-  'https://192.168.2.145:3000',
-  'https://172.168.0.174:3000'],
+      "https://172.168.3.31:3000",
+      "https://localhost:3000",
+      "https://192.168.56.27:3000",
+      "https://192.168.1.14:3000",
+      "https://172.168.1.163:3000",
+      "https://169.254.106.148:3000",
+      'http://localhost:3000',
+      "https://172.168.1.163:3000",
+      'https://192.168.124.160:3000',
+      'https://172.168.0.94:3000/',
+      'https://10.11.58.155:3000',
+      'https://172.168.0.174:3000',
+      'https://192.168.2.145:3000',
+      'https://172.168.0.174:3000'],
     methods: ["GET", "POST"],
   },
   secure: true,

@@ -12,9 +12,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 // Update the Socket.IO connection to use the secure wss protocol
 // const socket = io.connect("localhost:5000", { secure: true });
-const socket=io.connect("https://192.168.2.145:5000",{secure:true});
+const socket = io.connect("https://172.168.1.163:5000", { secure: true });
 const useStyles = makeStyles((theme) => ({
-  
+
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -51,8 +51,8 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
   },
   // myId: {
-    //  textAlign: "center",
-    //  margin: "0px",
+  //  textAlign: "center",
+  //  margin: "0px",
   // },
   callButton: {
     display: 'flex',
@@ -60,9 +60,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: '20px',
-    buttonHover : 'white',
+    buttonHover: 'white',
   },
- }));
+}));
 function App() {
   const classes = useStyles();
   const myVideo = useRef();
@@ -83,9 +83,9 @@ function App() {
   useEffect(() => {
     // io.on('me', (socket) => {
     //   console.log('User connected with ID:', socket.id);
-    
+
     //   // Handle other events as needed...
-    
+
     //   // socket.on('disconnect', () => {
     //   //   console.log('User disconnected:', socket.id);
     //   //   // Handle disconnection...
@@ -100,23 +100,23 @@ function App() {
         console.error('Error accessing media devices:', error);
       }
     };
-    
-	socket.on("me", (id) => {
-    console.log(socket,socket.id)
-		setMe(id)
-	})
-  socket.on("updateClients", (clients) => {
-    setConnectedClients(clients);
-    console.log("Connected Clients:", clients);
-  });
-    getMedia();
-		socket.on("me", (id) => {
-		  console.log("User connected with ID:", id);
-		  socket.emit("me", id);
-		});
-	  
+
     socket.on("me", (id) => {
-		console.log(id,"ghjkl");
+      console.log(socket, socket.id)
+      setMe(id)
+    })
+    socket.on("updateClients", (clients) => {
+      setConnectedClients(clients);
+      console.log("Connected Clients:", clients);
+    });
+    getMedia();
+    socket.on("me", (id) => {
+      console.log("User connected with ID:", id);
+      socket.emit("me", id);
+    });
+
+    socket.on("me", (id) => {
+      console.log(id, "ghjkl");
       setMe(id);
       console.log("id:", id);
     });
@@ -130,7 +130,7 @@ function App() {
     // callFirstClient();
     // callFirstClient();
     // if (callButtonRef.current) {
-      callButtonRef.current.click();
+    callButtonRef.current.click();
     // }
     return () => {
       if (stream) {
@@ -199,97 +199,97 @@ function App() {
       // answerCall();
     }
     // } else {
-      // alert("No connected clients to call.");
+    // alert("No connected clients to call.");
     // }
   };
 
-//   return (
-//     <div className="row 1">
-//       <h1 style={{ textAlign: "center", color: '#fff' }}>WebRTC</h1>
-//       <div className="container col">
-//         {/* <section> */}
-//         <div className="video-container">
-//           <div className="video">
-//             {stream && <video playsInline muted ref={myVideo} autoPlay style={{ width: "300px" }} />}
-//           </div>
-//           <div className="video">
-//             {callAccepted && !callEnded ? (
-//               <video playsInline ref={userVideo} autoPlay style={{ width: "300px" }} />
-//             ) : null}
-//           </div>
-//         </div>
-//         {/* </section> */}
-//         <div className="myId col">
-//           <TextField
-//             id="filled-basic"
-//             label="Name"
-//             variant="filled"
-//             value={name}
-//             onChange={(e) => setName(e.target.value)}
-//             style={{ marginBottom: "20px" }}
-//           />
-//           {/* <CopyToClipboard text={me} style={{ marginBottom: "2rem" }}>
-//             <Button variant="contained" color="primary" startIcon={<AssignmentIcon fontSize="large" />}>
-//               Copy ID
-//             </Button>
-//           </CopyToClipboard> */}
+  //   return (
+  //     <div className="row 1">
+  //       <h1 style={{ textAlign: "center", color: '#fff' }}>WebRTC</h1>
+  //       <div className="container col">
+  //         {/* <section> */}
+  //         <div className="video-container">
+  //           <div className="video">
+  //             {stream && <video playsInline muted ref={myVideo} autoPlay style={{ width: "300px" }} />}
+  //           </div>
+  //           <div className="video">
+  //             {callAccepted && !callEnded ? (
+  //               <video playsInline ref={userVideo} autoPlay style={{ width: "300px" }} />
+  //             ) : null}
+  //           </div>
+  //         </div>
+  //         {/* </section> */}
+  //         <div className="myId col">
+  //           <TextField
+  //             id="filled-basic"
+  //             label="Name"
+  //             variant="filled"
+  //             value={name}
+  //             onChange={(e) => setName(e.target.value)}
+  //             style={{ marginBottom: "20px" }}
+  //           />
+  //           {/* <CopyToClipboard text={me} style={{ marginBottom: "2rem" }}>
+  //             <Button variant="contained" color="primary" startIcon={<AssignmentIcon fontSize="large" />}>
+  //               Copy ID
+  //             </Button>
+  //           </CopyToClipboard> */}
 
-//           {/* <TextField
-//             id="filled-basic"
-//             label="ID to call"
-//             variant="filled"
-//             value={idToCall}
-//             onChange={(e) => setIdToCall(e.target.value)}
-//           /> */}
-//           <div className="call-button">
-//             {callAccepted && !callEnded ? (
-//               <Button variant="contained" color="secondary" onClick={leaveCall}>
-//                 End Call
-//               </Button>
-//             ) : (
-//               <IconButton color="primary" aria-label="call" onClick={callFirstClient} ref={callButtonRef}>
-//                 <PhoneIcon fontSize="large" />
-//               </IconButton>
-//             )}
-//             {idToCall}
-//           </div>
-//         </div>
-//         <div>
-//         {/* <h2>Connected Clients:</h2>
-//         <ul>
-//           {connectedClients.map((client) => (
-//             <li key={client}>{client}</li>
-//           ))}
-//         </ul> */}
-//       </div>
-//         <div>
-//           {receivingCall && !callAccepted ? (
-//             <div className="caller">
-//               <h1>{name} is calling...</h1>
-//               <Button variant="contained" color="primary" onClick={answerCall}>
-//                 Answer
-//               </Button>
-//             </div>
-//           ) : null}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-return (
-  <div className={classes.container}>
-    <div className={classes.videoContainer}>
-      <div className={classes.video}>
-        {stream && <video playsInline muted ref={myVideo} autoPlay style={{ width: "300px" }} />}
+  //           {/* <TextField
+  //             id="filled-basic"
+  //             label="ID to call"
+  //             variant="filled"
+  //             value={idToCall}
+  //             onChange={(e) => setIdToCall(e.target.value)}
+  //           /> */}
+  //           <div className="call-button">
+  //             {callAccepted && !callEnded ? (
+  //               <Button variant="contained" color="secondary" onClick={leaveCall}>
+  //                 End Call
+  //               </Button>
+  //             ) : (
+  //               <IconButton color="primary" aria-label="call" onClick={callFirstClient} ref={callButtonRef}>
+  //                 <PhoneIcon fontSize="large" />
+  //               </IconButton>
+  //             )}
+  //             {idToCall}
+  //           </div>
+  //         </div>
+  //         <div>
+  //         {/* <h2>Connected Clients:</h2>
+  //         <ul>
+  //           {connectedClients.map((client) => (
+  //             <li key={client}>{client}</li>
+  //           ))}
+  //         </ul> */}
+  //       </div>
+  //         <div>
+  //           {receivingCall && !callAccepted ? (
+  //             <div className="caller">
+  //               <h1>{name} is calling...</h1>
+  //               <Button variant="contained" color="primary" onClick={answerCall}>
+  //                 Answer
+  //               </Button>
+  //             </div>
+  //           ) : null}
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
+  return (
+    <div className={classes.container}>
+      <div className={classes.videoContainer}>
+        <div className={classes.video}>
+          {stream && <video playsInline muted ref={myVideo} autoPlay style={{ width: "300px" }} />}
+        </div>
+        <div className={classes.video}>
+          {callAccepted && !callEnded ? (
+            <video playsInline ref={userVideo} autoPlay style={{ width: "300px" }} />
+          ) : null}
+        </div>
       </div>
-      <div className={classes.video}>
-        {callAccepted && !callEnded ? (
-          <video playsInline ref={userVideo} autoPlay style={{ width: "300px" }} />
-        ) : null}
-      </div>
-    </div>
-    <div className={classes.myId}>
-      {/* <TextField
+      <div className={classes.myId}>
+        {/* <TextField
         id="filled-basic"
         label="Name"
         variant="filled"
@@ -297,31 +297,31 @@ return (
         onChange={(e) => setName(e.target.value)}
         style={{ marginBottom: "20px" }}
       /> */}
-      <div className={classes.callButton}>
-        {callAccepted && !callEnded ? (
-          <Button variant="contained" color="secondary" onClick={leaveCall}>
-            End Call
-          </Button>
-        ) : (
-          <IconButton color="primary" aria-label="call" onClick={callFirstClient} ref={callButtonRef}>
-            <PhoneIcon fontSize="large" />
-          </IconButton>
-        )}
-        {/* {idToCall} */}
+        <div className={classes.callButton}>
+          {callAccepted && !callEnded ? (
+            <Button variant="contained" color="secondary" onClick={leaveCall}>
+              End Call
+            </Button>
+          ) : (
+            <IconButton color="primary" aria-label="call" onClick={callFirstClient} ref={callButtonRef}>
+              <PhoneIcon fontSize="large" />
+            </IconButton>
+          )}
+          {/* {idToCall} */}
+        </div>
+      </div>
+      <div>
+        {receivingCall && !callAccepted ? (
+          <div className="caller">
+            <h1>Client is calling...</h1>
+            <Button variant="contained" color="primary" onClick={answerCall}>
+              Answer
+            </Button>
+          </div>
+        ) : null}
       </div>
     </div>
-    <div>
-      {receivingCall && !callAccepted ? (
-        <div className="caller">
-          <h1>Client is calling...</h1>
-          <Button variant="contained" color="primary" onClick={answerCall}>
-            Answer
-          </Button>
-        </div>
-      ) : null}
-    </div>
-  </div>
-);
+  );
 }
 
 
